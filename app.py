@@ -1,6 +1,9 @@
 from flask import Flask,render_template, session, redirect, request, url_for, g
 from functools import wraps
 from pymongo import Connection
+import tools
+import auth
+
 conn = Connection()
 db = conn['a']
 app = Flask(__name__)
