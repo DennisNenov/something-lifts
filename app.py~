@@ -45,22 +45,12 @@ def macros():
 def workout():
     return render_template("workout.html")
 
-@app.route("/graphs/<graph>")
-#@login_required
-def graphs(graph):
-    #weightlist = db.users.find_one({"username": username})["weightlist"]
-    #gains = db.users.find_one({"username": username})["gains"] #tracks progress in weights, change name if you want to make it more clear; gains will be a dictionary, for example: {squat: [50, 60, 70], deadlift: [100, 200, 300]}
-    gains = {'squat': [50, 60, 70], 
-             'bench': [30, 30, 40],
-             'deadlift': [100, 200, 250]};
-    if graph=="weight":
-        return render_template("graphs.html", weightlist=[100, 105, 107, 107], graph=graph)
-    elif graph=="squat":
-        return render_template("graphs.html", weightlist=gains['squat'], graph=graph)
-    elif graph=="bench":
-        return render_template("graphs.html", weightlist=gains['bench'], graph=graph)
-    elif graph=="deadlift":
-        return render_template("graphs.html", weightlist=gains['deadlift'], graph=graph)
+@app.route("/graphs")
+@login_required
+def graphs():
+    weightlist = db.users.find_one({"username": username})["weightlist"]
+    gains = db.users.find_one({"username": username})["gains"] #tracks progress in weights, change name if you want to make it more clear; gains will be a dictionary, for example: {squat: [50, 60, 70], deadlift: [100, 200, 300]}
+    return render_template("graphs.html", weightlist=weightlist, gains=gains)
 
 @app.route("/goals")
 @login_required
@@ -136,7 +126,6 @@ def register():
 def logout():
     session.pop('user', None)
     return redirect(url_for('home'))
-
 
 if __name__=="__main__":
     app.debug=True
