@@ -35,7 +35,21 @@ Later can be bootstrap-ified for sexiness.
 // in a dictionary-esque format.
 // This is done by importing data.js above. 
 
-// Necessary info should be contained within the var data.
+questionDiv = document.getElementById("question");
+answerFieldDiv = document.getElementById("answer_field");
 
+// Reminder:
+// Add an onClick event watcher to every answer you add.
+
+// Necessary info should be contained within the var data.
+var firstQuestion = data['Question1'];
+var firstQuestionText = firstQuestion['question_text'];
+questionDiv.innerHTML = firstQuestionText;
+
+// Loop over contents of question. Search for "answer" types. 
+// We should thus indicate that an entry in the JSON object is an answer type
+// by prefixing its key in some way.
+// This is done in the current template with "Answer#", 
+// e.g. "Answer1" "Answer2" "Answer3"
 
 </script>
