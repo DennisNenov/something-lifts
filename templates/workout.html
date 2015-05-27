@@ -64,7 +64,18 @@ for (var key in firstQuestion) {
 
 		// Add this answer div to the answer field div
 		answerFieldDiv.appendChild(thisAnswerDiv);
+
+		// Add on onclick eventlistener here.
 	}
+}
+
+function responseClick() {
+	// Determines response clicked (based on div), 
+	// (signalled by onclick eventwatcher),
+	// triggers loop to the end.
+
+	// There is no need to determine if the question cycle has reached the ended of the loop,
+	// by the nature of the for loop no answers will be printed.
 }
 
 // To-do: Responses, on-click event watchers, styling. 
