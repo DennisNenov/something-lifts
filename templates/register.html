@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% block bodycontent %}
 <h2> Register </h2>
 <form action="/register" method="post">
     <div>
@@ -10,3 +11,4 @@
       <input id="pwd" name="pwd" type="password" placeholder="Password"></div><br>
 
     <button type="submit">Register</button>
+{% endblock bodycontent %}

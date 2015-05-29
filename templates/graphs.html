@@ -12,9 +12,11 @@
     weightlist = {{weightlist}};
   </script>
 </head>
+{% block bodycontent %}
 <body>
   Your {{graph}}:
   <div id="content"></div>
   <script src="/static/graphs.js"></script>
 </body>
+{% endblock bodycontent %}
 </html>
