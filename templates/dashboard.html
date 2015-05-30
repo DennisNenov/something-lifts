@@ -1,4 +1,23 @@
 {% extends "base.html" %}
 
 {% block bodycontent %}
+<form method="POST" action="/enter">
+  Enter another workout here:
+  <br>
+  Squat: <input type="text" name="squat"></input>
+  <br>
+  Bench: <input type="text" name="bench"></input>
+  <br>
+  Deadlift: <input type="text" name="deadlift"></input>
+  <br>
+  <input type="submit"></submit>
+</form>
+
+<a href="/graphs/weight">View Weight History</a>
+<br>
+<a href="/graphs/squat">View Squat History</a>
+<br>
+<a href="/graphs/bench">View Bench History</a>
+<br>
+<a href="/graphs/deadlift">View Deadlift History</a>
 {% endblock bodycontent %}

@@ -1,7 +1,14 @@
+<!DOCTYPE HTML>
+<html>
 <h1> Something-Lifts </h1>
-
+<head>
+{% block headcontent %}
+{% endblock headcontent %}
+</head>
+<body>
 {% block bodycontent %}
 {% endblock bodycontent %}
+</body>
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul class=flashes>
@@ -11,3 +18,4 @@
     </ul>
   {% endif %}
 {% endwith %}
+</html>

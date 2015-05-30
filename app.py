@@ -8,6 +8,7 @@ import auth
 conn = Connection()
 db = conn['a']
 app = Flask(__name__)
+app.secret_key = "a"
 
 NOT_LOGGED_IN = "You are not logged in!"
 ALREADY_LOGGED_IN = "You are already logged in!"
@@ -45,14 +46,33 @@ def macros():
 def workout():
     return render_template("workout.html")
 
+@app.route("/enter", methods=["GET", "POST"])
+def enter():
+    if request.method == "POST":
+        try:
+            squat = int(request.form.get("squat"))
+            bench = int(request.form.get("bench"))
+            deadlift = int(request.form.get("deadlift"))
+        except:
+            flash("Please input valid numbers for all lifts")
+            return redirect(url_for("dashboard"))
+        tools.enterInfo(squat, bench, deadlift)
+        flash("squat: " + str(squat))
+        flash("squat: " + str(bench))
+        flash("squat: " + str(deadlift))
+        flash("Data submitted successfully!")
+        return redirect(url_for("dashboard"))
+    else:
+        return "You are not supposed to be here"
+
 @app.route("/graphs/<graph>")
 #@login_required
 def graphs(graph):
     #weightlist = db.users.find_one({"username": username})["weightlist"]
     #gains = db.users.find_one({"username": username})["gains"] #tracks progress in weights, change name if you want to make it more clear; gains will be a dictionary, for example: {squat: [50, 60, 70], deadlift: [100, 200, 300]}
-    gains = {'squat': [50, 60, 70], 
-             'bench': [30, 30, 40],
-             'deadlift': [100, 200, 250]};
+    gains = {'squat': tools.getLift("squat"), 
+             'bench': tools.getLift("bench"),
+             'deadlift': tools.getLift("deadlift")};
     if graph=="weight":
         return render_template("graphs.html", weightlist=[100, 105, 107, 107], graph=graph)
     elif graph=="squat":

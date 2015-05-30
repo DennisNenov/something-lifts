@@ -1,3 +1,8 @@
+from pymongo import MongoClient
+
+db = MongoClient('mongodb://localhost:27017/').dataclient
+lifts = db.lifts
+
 # Edit the password requirements to suit needs.
 PASSWORD_REQUIREMENTS = {
 	'chars': 6,
@@ -16,3 +21,15 @@ def valid_password(password):
 
 	print chars_hit, uppers_hit, nums_hit
 	return chars_hit and uppers_hit and nums_hit
+
+def enterInfo(squat, bench, deadlift):
+        lifts.insert({"squat": squat,
+                      "bench": bench,
+                      "deadlift": deadlift})
+
+def getLift(lift):
+        ans = []
+        for day in lifts.find({}):
+                ans.append(day[lift])
+        print ans
+        return ans
