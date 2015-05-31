@@ -12,7 +12,13 @@
   <br>
   <input type="submit"></submit>
 </form>
-
+<br>
+<form method="POST" action="/macros">
+  Input food for: <input type="date" name="date">
+  <input type="text" name="food"></input>
+  <input type="submit"></submit>
+</form>
+<br>
 <a href="/graphs/weight">View Weight History</a>
 <br>
 <a href="/graphs/squat">View Squat History</a>
@@ -20,4 +26,6 @@
 <a href="/graphs/bench">View Bench History</a>
 <br>
 <a href="/graphs/deadlift">View Deadlift History</a>
+<br>
+<a href="/graphs/food">View Daily Food Information</a>
 {% endblock bodycontent %}

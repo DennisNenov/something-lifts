@@ -1,4 +1,31 @@
 {% extends "base.html" %}
 
 {% block bodycontent %}
+{% for item in d %}
+<form action="/macros" method="POST">
+Name: {{item['name']}}
+<br>
+<input type="hidden" name="choosefood"></input>
+<input type="hidden" name="date" value="{{date}}"></input>
+<input type="hidden" name="serving size"  value="{{item['values']['per']}}"></input>
+<input type="hidden" name="calories"  value="{{item['kcal']}}"></input>
+<input type="hidden" name="fat" value="{{item['fat']}}"></input>
+<input type="hidden" name="carbs" value="{{item['carbohydrate']}}"></input>
+<input type="hidden" name="protein" value="{{item['protein']}}"></input>
+Serving Size: {{item['values']['per']}} {{item['values']['unit']}}
+<br>
+Calories: {{item['kcal']}}
+<br>
+Fat: {{item['fat']}}
+<br>
+Carbs: {{item['carbohydrate']}}
+<br>
+Protein: {{item['protein']}}
+<br>
+<input type="submit"></submit>
+</form>
+<br>
+{% endfor %}
+<br>
+{{d}}
 {% endblock bodycontent %}
