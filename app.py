@@ -45,10 +45,11 @@ def macros():
         if "choosefood" in request.form:
             user = session['user']
             date = request.form.get("date")
-            calories = request.form.get("calories")
-            fat = request.form.get("fat")
-            carbs = request.form.get("carbs")
-            protein = request.form.get("protein")
+            servings = request.form.get("servings")
+            calories = str(float(servings)*float(request.form.get("calories")))
+            fat = str(float(servings)*float(request.form.get("fat")))
+            carbs = str(float(servings)*float(request.form.get("carbs")))
+            protein = str(float(servings)*float(request.form.get("protein")))
             tools.enterFood(user, date, calories, fat, carbs, protein)
             return str(tools.getFood(user, date))
         date = request.form.get("date")
