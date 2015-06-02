@@ -7,7 +7,30 @@
 // Inside the answers are nested response questions and accompanying answers ("answer_text", what the user would click to respond).
 // At some point a question will have no answers. It'll just be a response to the user that indicates
 // the end of the loop (i.e., their program will have been determined and displayed)
-
+var data = {
+	"Question1": {
+		"question_text": "Do wish to gain weight, lose weight, or maintain?",
+		"Answer1": {
+			"answer_text": "Gain.",
+			"Message": "Bulking Diet: \
+						Calories: TDEE + 500 calories \
+						Protein: 1+ grams per lb. bodyweight"
+		},
+		"Answer2": {
+			"answer_text": "Lose.",
+			"Message": "Cutting Diet: \
+						Calories: TDEE - 500 calories \
+						Protein: 1.5+ grams per lb. bodyweight"
+		},
+		"Answer3": {
+			"answer_text": "Maintain.",
+			"Message": "Maintenance: \
+						Calories: TDEE \
+						Protein: 1.25+ grams per lb. bodyweight"		
+			}
+		}
+}
+/*
 var data = {
 	"Question1": {
 		"question_text": "Do you even lift?",
@@ -67,3 +90,4 @@ var data = {
 		}
 	}
 }
+*/
