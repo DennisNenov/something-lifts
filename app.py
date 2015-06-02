@@ -52,12 +52,13 @@ def macros():
             carbs = str(float(servings)*float(request.form.get("carbs")))
             protein = str(float(servings)*float(request.form.get("protein")))
             tools.enterFood(user, date, calories, fat, carbs, protein)
+	    flash("food input successful")
             return str(tools.getFood(user, date))
         date = request.form.get("date")
         food = request.form.get("food")
         url = urllib2.urlopen("https://api.damonmcminn.com/nutrition/food?search=" + food)
         d = json.load(url)['foods']
-    return render_template("macros.html", d=d, date=date)
+    return redirect(url_for("dashboard"))
 
 @app.route("/workout")
 @login_required

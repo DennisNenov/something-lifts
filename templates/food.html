@@ -1,5 +1,7 @@
+{% extends "base.html" %}
+
+{% block bodycontent %}
 Your Intake:
-{{food}}
 <br>
 {% for f in food %}
 {{f}}
@@ -14,7 +16,4 @@ Protein: {{food[f]['protein']}}
 <br>
 <br>
 {% endfor %}
-3.22
-.0091
-.791
-.007
+{% endblock bodycontent %}
