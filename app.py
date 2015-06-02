@@ -33,7 +33,8 @@ def home():
 @login_required
 def dashboard():
     if 'user' in session:
-        return render_template('dashboard.html')
+        gains = tools.getAllLifts(session['user'])
+        return render_template('dashboard.html', gains=gains)
     else:
         flash(NOT_LOGGED_IN)
         return redirect(url_for('login')) 
@@ -68,18 +69,14 @@ def workout():
 def enter():
     if request.method == "POST":
         try:
-            squat = int(request.form.get("squat"))
-            bench = int(request.form.get("bench"))
-            deadlift = int(request.form.get("deadlift"))
+            lifts = {}
+            for i in range(len(request.form)/2):
+                lifts[request.form.get('lift'+str(i+1))] = int(request.form.get('amount'+str(i+1)))
             user = session['user']
         except:
-            flash("Please input valid numbers for all lifts")
+            flash("Please input valid values for lifts and amounts")
             return redirect(url_for("dashboard"))
-        tools.enterInfo(user, squat, bench, deadlift)
-        flash("squat: " + str(squat))
-        flash("squat: " + str(bench))
-        flash("squat: " + str(deadlift))
-        flash("Data submitted successfully!")
+        tools.enterInfo(user, lifts)
         return redirect(url_for("dashboard"))
     else:
         return "You are not supposed to be here"
@@ -87,23 +84,12 @@ def enter():
 @app.route("/graphs/<graph>")
 #@login_required
 def graphs(graph):
-    #weightlist = db.users.find_one({"username": username})["weightlist"]
-    #gains = db.users.find_one({"username": username})["gains"] #tracks progress in weights, change name if you want to make it more clear; gains will be a dictionary, for example: {squat: [50, 60, 70], deadlift: [100, 200, 300]}
     user = session['user']
-    gains = {'squat': tools.getLift(user, "squat"), 
-             'bench': tools.getLift(user, "bench"),
-             'deadlift': tools.getLift(user, "deadlift")};
-    food = {''}
-    if graph=="weight":
-        return render_template("graphs.html", weightlist=[100, 105, 107, 107], graph=graph)
-    elif graph=="squat":
-        return render_template("graphs.html", weightlist=gains['squat'], graph=graph)
-    elif graph=="bench":
-        return render_template("graphs.html", weightlist=gains['bench'], graph=graph)
-    elif graph=="deadlift":
-        return render_template("graphs.html", weightlist=gains['deadlift'], graph=graph)
-    elif graph=="food":
-        return render_template("food.html", food=tools.getAllFood(user))
+    gains = tools.getAllLifts(user)
+    food = tools.getAllFood(user)
+    if graph=="food":
+        return render_template("food.html", food=food)
+    return render_template("graphs.html", weightlist=gains[graph], graph=graph)
 
 @app.route("/goals")
 @login_required

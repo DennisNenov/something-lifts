@@ -23,19 +23,28 @@ def valid_password(password):
 	print chars_hit, uppers_hit, nums_hit
 	return chars_hit and uppers_hit and nums_hit
 
-def enterInfo(user, squat, bench, deadlift):
+def enterInfo(user, inputLifts):
         lifts.insert({"user": user,
-                      "squat": squat,
-                      "bench": bench,
-                      "deadlift": deadlift})
+                      "lifts": inputLifts})
 
 def getLift(user, lift):
         ans = []
         for day in lifts.find({"user":user}):
-                ans.append(day[lift])
+                ans.append(day['lifts'][lift])
         print ans
         return ans
-        
+
+def getAllLifts(user):
+        liftsDict = {}
+        for day in lifts.find({"user":user}):
+                for lift in day['lifts']:
+                        if lift not in liftsDict:
+                                liftsDict[lift] = [day['lifts'][lift]]
+                        else:
+                                liftsDict[lift].append(day['lifts'][lift])
+        print "liftsDict: " + str(liftsDict)
+        return liftsDict
+ 
 def enterFood(user, day, calories, fat, carbs, protein):
         food.insert({ "user": user,
                       "date": day,

@@ -1,14 +1,27 @@
 {% extends "base.html" %}
 
+{% block headcontent %}
+<script>
+  var liftAmount = 1;
+  var addLift = function() {
+  liftAmount += 1;
+  document.getElementById("liftsinput").innerHTML = document.getElementById("liftsinput").innerHTML + "Lift " + liftAmount + ": <input type='text' name='lift" + liftAmount + "'></input><br>Amount:<input type='text' name='amount" + liftAmount + "'></input><br><br>";
+  };
+</script>
+{% endblock headcontent %}
+
 {% block bodycontent %}
 <form method="POST" action="/enter">
   Enter another workout here:
+  <div id="liftsinput">
   <br>
-  Squat: <input type="text" name="squat"></input>
+  Lift 1: <input type="text" name="lift1"></input>
   <br>
-  Bench: <input type="text" name="bench"></input>
+  Amount: <input type="text" name="amount1"></input>
   <br>
-  Deadlift: <input type="text" name="deadlift"></input>
+  <br>
+  </div>
+  <button type="button" onclick="addLift();">Add Lift</button>
   <br>
   <input type="submit"></submit>
 </form>
@@ -19,13 +32,9 @@
   <input type="submit"></submit>
 </form>
 <br>
-<a href="/graphs/weight">View Weight History</a>
+{% for lift in gains %}
+<a href="/graphs/{{lift}}">View {{lift}} History</a>
 <br>
-<a href="/graphs/squat">View Squat History</a>
-<br>
-<a href="/graphs/bench">View Bench History</a>
-<br>
-<a href="/graphs/deadlift">View Deadlift History</a>
-<br>
+{% endfor %}
 <a href="/graphs/food">View Daily Food Information</a>
 {% endblock bodycontent %}
