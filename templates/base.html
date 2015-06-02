@@ -38,7 +38,7 @@
           <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
             <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="{{ url_for('workout') }}">Program Picker</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -67,7 +67,7 @@
       <div class="panel panel-default">
   		<div class="panel-body" style="text-align: center;">
   		{% if 'user' in session %}
-  		You are currently logged in as <strong>{{ session['user'] }}</strong>.
+  		You are currently logged in as <strong>{{ session['user'] }}</strong>. You can <a href="{{ url_for('logout') }}">logout</a>.
   		{% else %}
   		<strong>You are not logged in!</strong> Try logging in <a href="{{ url_for('login') }}">here</a>.  
   		{% endif %}
