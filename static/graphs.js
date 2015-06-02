@@ -6,11 +6,11 @@ height=400,
 padding=20;
 
 var xScale = d3.scale.linear()
-    .domain([0,3])
+    .domain([0,numWorkouts])
     .range([padding,width-padding]);
 
 var yScale = d3.scale.linear()
-    .domain([0,500])
+    .domain([0,greatestValue])
     .range([height-padding,padding]);
 
 var yAxis = d3.svg.axis().scale(yScale).orient("left");
@@ -20,6 +20,9 @@ var svg = d3.select("#content").append("svg")
     .attr("height", 400)
     .classed("bordered", true)
     .attr("id", "svg")
+    .append("g")
+    .attr("transform","translate(40,0)")
+    .call(yAxis)
 
 svg.selectAll(".dots")
     .data(weightlist)

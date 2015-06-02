@@ -41,4 +41,7 @@
 <br>
 {% endfor %}
 <a href="/graphs/food">View Daily Food Information</a>
+<form action="/graphs/food" method="POST">
+  View Food Information for <input type="date" name="date"></input><input type="submit"></input></a>
+</form>
 {% endblock bodycontent %}

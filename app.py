@@ -1,14 +1,10 @@
 from flask import Flask,render_template, session, redirect, request, url_for, g, flash
 from functools import wraps
-#from pymongo import Connection
-#import mongo
 import tools
 import auth
 import urllib2
 import json
 
-#conn = Connection()
-#db = conn['a']
 app = Flask(__name__)
 app.secret_key = "a"
 
@@ -72,24 +68,28 @@ def enter():
     if request.method == "POST":
         try:
             lifts = {}
+            print request.form
             for i in range(len(request.form)/2):
                 lifts[request.form.get('lift'+str(i+1))] = int(request.form.get('amount'+str(i+1)))
             user = session['user']
         except:
             flash("Please input valid values for lifts and amounts")
             return redirect(url_for("dashboard"))
+        print "HELLO"
+        print "lifts: " + str(lifts)
         tools.enterInfo(user, lifts)
         return redirect(url_for("dashboard"))
     else:
         return "You are not supposed to be here"
 
-@app.route("/graphs/<graph>")
+@app.route("/graphs/<graph>", methods=["GET", "POST"])
 #@login_required
 def graphs(graph):
     user = session['user']
     gains = tools.getAllLifts(user)
-    food = tools.getAllFood(user)
     if graph=="food":
+        date = request.form.get("date")
+        food = tools.getFood(user, date)
         return render_template("food.html", food=food)
     return render_template("graphs.html", weightlist=gains[graph], graph=graph)
 

@@ -1,19 +1,14 @@
 {% extends "base.html" %}
-
 {% block bodycontent %}
-Your Intake:
+Your intake:
 <br>
-{% for f in food %}
-{{f}}
+Calories: {{food['calories']}}
 <br>
-Calories: {{food[f]['calories']}}
+Fat: {{food['fat']}}
 <br>
-Fat: {{food[f]['fat']}}
+Carbs: {{food['carbs']}}
 <br>
-Carbs: {{food[f]['carbs']}}
-<br>
-Protein: {{food[f]['protein']}}
+Protein: {{food['protein']}}
 <br>
 <br>
-{% endfor %}
 {% endblock bodycontent %}
