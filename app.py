@@ -1,14 +1,14 @@
 from flask import Flask,render_template, session, redirect, request, url_for, g, flash
 from functools import wraps
-from pymongo import Connection
-import mongo
+#from pymongo import Connection
+#import mongo
 import tools
 import auth
 import urllib2
 import json
 
-conn = Connection()
-db = conn['a']
+#conn = Connection()
+#db = conn['a']
 app = Flask(__name__)
 app.secret_key = "a"
 
@@ -52,13 +52,14 @@ def macros():
             carbs = str(float(servings)*float(request.form.get("carbs")))
             protein = str(float(servings)*float(request.form.get("protein")))
             tools.enterFood(user, date, calories, fat, carbs, protein)
-	    flash("food input successful")
-            return str(tools.getFood(user, date))
+            #return str(tools.getFood(user, date))
+            flash("Food input successful")
+            return redirect(url_for("dashboard"))
         date = request.form.get("date")
         food = request.form.get("food")
         url = urllib2.urlopen("https://api.damonmcminn.com/nutrition/food?search=" + food)
         d = json.load(url)['foods']
-    return redirect(url_for("dashboard"))
+    return render_template("macros.html", d=d, date=date)
 
 @app.route("/workout")
 @login_required
