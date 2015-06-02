@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html" %}
 
 <!--
@@ -82,3 +83,88 @@ function responseClick() {
 // To-do: Responses, on-click event watchers, styling. 
 
 </script>
+=======
+{% extends "base.html" %}
+
+<!--
+Temporary stylesheet before move to external.
+-->
+
+<style>
+</style>
+
+<!--
+Note: move data.js to static folder later after testing is over.
+-->
+<script src="data.js"></script>
+
+<!--
+This script should be moved to its own script file later and embedded when it's done.
+-->
+
+<!-- div used for displayed content to the user.
+Later can be bootstrap-ified for sexiness.
+-->
+<div id="main" class="main">
+		<div id="question" class="question">
+		<!-- Write question and/or standalone response here -->
+		</div>
+
+		<div id="answer_field" class="field">
+		<!-- Add answer divs here. -->
+		</div>
+</div>
+
+
+<script>
+// Import a JSON file that contains question and answer nests
+// in a dictionary-esque format.
+// This is done by importing data.js above. 
+
+questionDiv = document.getElementById("question");
+answerFieldDiv = document.getElementById("answer_field");
+
+// Reminder:
+// Add an onClick event watcher to every answer you add.
+
+// Necessary info should be contained within the var data.
+var firstQuestion = data["Question1"];
+var firstQuestionText = firstQuestion["question_text"];
+questionDiv.innerHTML = firstQuestionText;
+
+// Loop over contents of question. Search for "answer" types. 
+// We should thus indicate that an entry in the JSON object is an answer type
+// by prefixing its key in some way.
+// This is done in the current template with "Answer#", 
+// e.g. "Answer1" "Answer2" "Answer3"
+
+for (var key in firstQuestion) {
+	if (key.substring(0,1) == "A") {
+		// Will use "A" as first characer as check if it's an answer type of key.
+		var thisAnswer = firstQuestion["key"];
+		var thisAnswerText = thisAnswer["answer_text"];
+
+		// Create an answer div
+		var thisAnswerDiv = createElement("div");
+		thisAnswerDiv.style = "answer";
+
+		// Add this answer div to the answer field div
+		answerFieldDiv.appendChild(thisAnswerDiv);
+
+		// Add on onclick eventlistener here.
+	}
+}
+
+function responseClick() {
+	// Determines response clicked (based on div), 
+	// (signalled by onclick eventwatcher),
+	// triggers loop to the end.
+
+	// There is no need to determine if the question cycle has reached the ended of the loop,
+	// by the nature of the for loop no answers will be printed.
+}
+
+// To-do: Responses, on-click event watchers, styling. 
+
+</script>
+>>>>>>> cec31b0596e67e0d1c526b8abdaa8b8c3401fc5f

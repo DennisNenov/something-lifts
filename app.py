@@ -4,10 +4,13 @@ from pymongo import Connection
 import mongo
 import tools
 import auth
+import urllib2
+import json
 
 conn = Connection()
 db = conn['a']
 app = Flask(__name__)
+app.secret_key = "a"
 
 NOT_LOGGED_IN = "You are not logged in!"
 ALREADY_LOGGED_IN = "You are already logged in!"
@@ -30,37 +33,63 @@ def home():
 @login_required
 def dashboard():
     if 'user' in session:
-        return render_template('dashboard.html')
+        gains = tools.getAllLifts(session['user'])
+        return render_template('dashboard.html', gains=gains)
     else:
         flash(NOT_LOGGED_IN)
         return redirect(url_for('login')) 
 
-@app.route("/macros")
+@app.route("/macros", methods=["GET", "POST"])
 @login_required
 def macros():
-    return render_template("macros.html")
+    if request.method == "POST":
+        if "choosefood" in request.form:
+            user = session['user']
+            date = request.form.get("date")
+            servings = request.form.get("servings")
+            calories = str(float(servings)*float(request.form.get("calories")))
+            fat = str(float(servings)*float(request.form.get("fat")))
+            carbs = str(float(servings)*float(request.form.get("carbs")))
+            protein = str(float(servings)*float(request.form.get("protein")))
+            tools.enterFood(user, date, calories, fat, carbs, protein)
+            return str(tools.getFood(user, date))
+        date = request.form.get("date")
+        food = request.form.get("food")
+        url = urllib2.urlopen("https://api.damonmcminn.com/nutrition/food?search=" + food)
+        d = json.load(url)['foods']
+    return render_template("macros.html", d=d, date=date)
 
 @app.route("/workout")
 @login_required
 def workout():
     return render_template("workout.html")
 
+@app.route("/enter", methods=["GET", "POST"])
+@login_required
+def enter():
+    if request.method == "POST":
+        try:
+            lifts = {}
+            for i in range(len(request.form)/2):
+                lifts[request.form.get('lift'+str(i+1))] = int(request.form.get('amount'+str(i+1)))
+            user = session['user']
+        except:
+            flash("Please input valid values for lifts and amounts")
+            return redirect(url_for("dashboard"))
+        tools.enterInfo(user, lifts)
+        return redirect(url_for("dashboard"))
+    else:
+        return "You are not supposed to be here"
+
 @app.route("/graphs/<graph>")
 #@login_required
 def graphs(graph):
-    #weightlist = db.users.find_one({"username": username})["weightlist"]
-    #gains = db.users.find_one({"username": username})["gains"] #tracks progress in weights, change name if you want to make it more clear; gains will be a dictionary, for example: {squat: [50, 60, 70], deadlift: [100, 200, 300]}
-    gains = {'squat': [50, 60, 70], 
-             'bench': [30, 30, 40],
-             'deadlift': [100, 200, 250]};
-    if graph=="weight":
-        return render_template("graphs.html", weightlist=[100, 105, 107, 107], graph=graph)
-    elif graph=="squat":
-        return render_template("graphs.html", weightlist=gains['squat'], graph=graph)
-    elif graph=="bench":
-        return render_template("graphs.html", weightlist=gains['bench'], graph=graph)
-    elif graph=="deadlift":
-        return render_template("graphs.html", weightlist=gains['deadlift'], graph=graph)
+    user = session['user']
+    gains = tools.getAllLifts(user)
+    food = tools.getAllFood(user)
+    if graph=="food":
+        return render_template("food.html", food=food)
+    return render_template("graphs.html", weightlist=gains[graph], graph=graph)
 
 @app.route("/goals")
 @login_required

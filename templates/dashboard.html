@@ -1,1 +1,40 @@
 {% extends "base.html" %}
+
+{% block headcontent %}
+<script>
+  var liftAmount = 1;
+  var addLift = function() {
+  liftAmount += 1;
+  document.getElementById("liftsinput").innerHTML = document.getElementById("liftsinput").innerHTML + "Lift " + liftAmount + ": <input type='text' name='lift" + liftAmount + "'></input><br>Amount:<input type='text' name='amount" + liftAmount + "'></input><br><br>";
+  };
+</script>
+{% endblock headcontent %}
+
+{% block bodycontent %}
+<form method="POST" action="/enter">
+  Enter another workout here:
+  <div id="liftsinput">
+  <br>
+  Lift 1: <input type="text" name="lift1"></input>
+  <br>
+  Amount: <input type="text" name="amount1"></input>
+  <br>
+  <br>
+  </div>
+  <button type="button" onclick="addLift();">Add Lift</button>
+  <br>
+  <input type="submit"></submit>
+</form>
+<br>
+<form method="POST" action="/macros">
+  Input food for: <input type="date" name="date">
+  <input type="text" name="food"></input>
+  <input type="submit"></submit>
+</form>
+<br>
+{% for lift in gains %}
+<a href="/graphs/{{lift}}">View {{lift}} History</a>
+<br>
+{% endfor %}
+<a href="/graphs/food">View Daily Food Information</a>
+{% endblock bodycontent %}

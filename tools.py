@@ -1,3 +1,9 @@
+from pymongo import MongoClient
+
+db = MongoClient('mongodb://localhost:27017/').dataclient
+lifts = db.lifts
+food = db.food
+
 # Edit the password requirements to suit needs.
 PASSWORD_REQUIREMENTS = {
 	'chars': 6,
@@ -16,3 +22,71 @@ def valid_password(password):
 
 	print chars_hit, uppers_hit, nums_hit
 	return chars_hit and uppers_hit and nums_hit
+
+def enterInfo(user, inputLifts):
+        lifts.insert({"user": user,
+                      "lifts": inputLifts})
+
+def getLift(user, lift):
+        ans = []
+        for day in lifts.find({"user":user}):
+                ans.append(day['lifts'][lift])
+        print ans
+        return ans
+
+def getAllLifts(user):
+        liftsDict = {}
+        for day in lifts.find({"user":user}):
+                for lift in day['lifts']:
+                        if lift not in liftsDict:
+                                liftsDict[lift] = [day['lifts'][lift]]
+                        else:
+                                liftsDict[lift].append(day['lifts'][lift])
+        print "liftsDict: " + str(liftsDict)
+        return liftsDict
+ 
+def enterFood(user, day, calories, fat, carbs, protein):
+        food.insert({ "user": user,
+                      "date": day,
+                      "calories": calories,
+                      "fat": fat,
+                      "carbs": carbs,
+                      "protein": protein})
+
+def getFood(user, day):
+        calories = 0.0
+        fat = 0.0
+        carbs = 0.0
+        protein = 0.0
+        for f in food.find({"user":user, "date":day}):
+                calories += float(f['calories'])
+                fat += float(f['fat'])
+                carbs += float(f['carbs'])
+                protein += float(f['protein'])
+        return { "calories": calories,
+                 "fat": fat,
+                 "carbs": carbs,
+                 "protein": protein }
+
+def getAllFood(user):
+        dates = []
+        for f in food.find({"user": user}):
+                date = f['date']
+                if date not in dates:
+                        dates.append(date)
+        foodsDict = {}
+        for date in dates:
+                calories = 0
+                fat = 0
+                carbs = 0
+                protein = 0
+                for f in food.find({"user": user, "date": date}):
+                        calories += float(f['calories'])
+                        fat += float(f['fat'])
+                        carbs += float(f['carbs'])
+                        protein += float(f['protein'])
+                foodsDict[date] = { "calories": calories,
+                                   "fat": fat,
+                                   "carbs": carbs,
+                                   "protein": protein }
+        return foodsDict
