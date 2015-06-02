@@ -9,8 +9,14 @@ Temporary stylesheet before move to external.
 
 <!--
 Note: move data.js to static folder later after testing is over.
+Update: data.js has been moved to static folder.
 -->
-<script src="data.js"></script>
+<script src="/static/data.js"></script>
+<script>
+console.log(window.data); 
+data = window.data;
+// Test if data was successfully / properly loaded.
+</script>
 
 <!--
 This script should be moved to its own script file later and embedded when it's done.
@@ -67,10 +73,15 @@ for (var key in firstQuestion) {
 		var thisAnswerDiv = createElement("div");
 		thisAnswerDiv.style = "answer";
 
+		// Add on onclick eventlistener here.
+		thisAnswerDiv.addEventListener("click", responseClick());
+
+		// When an answer is clicked, the responeClick() function will be called to determine what to do.
+
 		// Add this answer div to the answer field div
 		answerFieldDiv.appendChild(thisAnswerDiv);
 
-		// Add on onclick eventlistener here.
+
 	}
 }
 
