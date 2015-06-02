@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 
+{% block title %}
+Index
+{% endblock title %}
+
 {% block bodycontent %}
 <h1>Welcome to Something-Lifts!</h1>
+
+<a href="{{ url_for('login') }}">
+	<button type="button" class="btn btn-primary btn-lg">Login</button>
+</a>
+<a href="{{ url_for('register') }}">
+	<button type="button" class="btn btn-success btn-lg">Register</button>
+</a>
+
+
 {% endblock bodycontent %}
