@@ -37,7 +37,7 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -64,6 +64,15 @@
 			{% endblock bodycontent %}
 		</div>
       </div>
+      <div class="panel panel-default">
+  		<div class="panel-body" style="text-align: center;">
+  		{% if 'user' in session %}
+  		You are currently logged in as <strong>{{ session['user'] }}</strong>.
+  		{% else %}
+  		<strong>You are not logged in!</strong> Try logging in <a href="{{ url_for('login') }}">here</a>.  
+  		{% endif %}
+  	</div>
+	</div>
 
 
     </div><!-- /.container -->
