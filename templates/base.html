@@ -22,18 +22,7 @@
     {% block headcontent %}
 	{% endblock headcontent %}
   </head>
-
   <body>
-  {% with messages = get_flashed_messages() %}
-  	{% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-   	 </ul>
-  	{% endif %}
-	{% endwith %}
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -57,6 +46,15 @@
 
     <div class="container">
     <br><br><br>
+     {% with messages = get_flashed_messages() %}
+  	{% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+   	 </ul>
+  	{% endif %}
+	{% endwith %}
       <div class="jumbotron">
       	<div style="text-align: center;">
       <!-- Standard container jumbotron -->
