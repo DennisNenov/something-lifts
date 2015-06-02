@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 {% extends "base.html" %}
-
+{% block headcontent %}
 <!--
 Temporary stylesheet before move to external.
 -->
@@ -17,9 +16,13 @@ Note: move data.js to static folder later after testing is over.
 This script should be moved to its own script file later and embedded when it's done.
 -->
 
+{% endblock headcontent %}
+
 <!-- div used for displayed content to the user.
 Later can be bootstrap-ified for sexiness.
 -->
+
+{% block bodycontent %}
 <div id="main" class="main">
 		<div id="question" class="question">
 		<!-- Write question and/or standalone response here -->
@@ -167,4 +170,4 @@ function responseClick() {
 // To-do: Responses, on-click event watchers, styling. 
 
 </script>
->>>>>>> cec31b0596e67e0d1c526b8abdaa8b8c3401fc5f
+{% endblock bodycontent %}
