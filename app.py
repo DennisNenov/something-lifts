@@ -104,6 +104,10 @@ def goals():
        #keep copy+pasting and changing the goals to the different goals youre going to include
     return render_template("goals.html")
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if 'user' in session:
