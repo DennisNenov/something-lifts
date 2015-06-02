@@ -29,12 +29,17 @@ Later can be bootstrap-ified for sexiness.
 -->
 
 {% block bodycontent %}
+<h1>Program Picker</h1>
+<br><br>
 <div id="main" class="main">
+		<strong>Question:</strong><br><br>
 		<div id="question" class="question">
 		<!-- Write question and/or standalone response here -->
-			<p>Question:</p>
+			
 		</div>
 
+		<br><br>
+		<strong>Answers:</strong><br><br>
 		<div id="answer_field" class="field">
 		<!-- Add answer divs here. -->
 		</div>
@@ -72,6 +77,7 @@ for (var key in firstQuestion) {
 		// Create an answer div
 		var thisAnswerDiv = document.createElement("div");
 		thisAnswerDiv.style = "answer";
+		thisAnswerDiv.innerHTML = thisAnswerText;
 
 		// Add on onclick eventlistener here.
 		thisAnswerDiv.addEventListener("click", responseClick());
