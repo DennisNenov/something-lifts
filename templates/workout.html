@@ -66,11 +66,11 @@ questionDiv.innerHTML = firstQuestionText;
 for (var key in firstQuestion) {
 	if (key.substring(0,1) == "A") {
 		// Will use "A" as first characer as check if it's an answer type of key.
-		var thisAnswer = firstQuestion["key"];
+		var thisAnswer = firstQuestion[key];
 		var thisAnswerText = thisAnswer["answer_text"];
 
 		// Create an answer div
-		var thisAnswerDiv = createElement("div");
+		var thisAnswerDiv = document.createElement("div");
 		thisAnswerDiv.style = "answer";
 
 		// Add on onclick eventlistener here.

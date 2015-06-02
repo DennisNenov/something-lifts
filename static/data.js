@@ -10,7 +10,7 @@
 
 var data = {
 	"Question1": {
-		"question_text": "Do you even lift?"
+		"question_text": "Do you even lift?",
 		"Answer1": {
 			"answer_text": "Yeah.",
 			"Question2": {
@@ -28,11 +28,11 @@ var data = {
 					"Question3": "Your program is..."
 				}
 			}
-		}
+		},
 		"Answer2": {
 			"answer_text": "Nah.",
 			"Question2": {
-				"question_text": "Do you want to?"
+				"question_text": "Do you want to?",
 				"Answer1": {
 					"answer_text": "1.",
 					"Question3": "Your program is..."
@@ -46,11 +46,11 @@ var data = {
 					"Question3": "Your program is..."
 				}
 			}
-		}
+		},
 		"Answer3": {
 			"answer_text": "Maybe.",
 			"Question2": {
-				"question_text": "Decide."
+				"question_text": "Decide.",
 				"Answer1": {
 					"answer_text": "1.",
 					"Question3": "Your program is..."
