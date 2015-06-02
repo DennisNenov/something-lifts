@@ -5,31 +5,34 @@
   var liftAmount = 1;
   var addLift = function() {
   liftAmount += 1;
-  document.getElementById("liftsinput").innerHTML = document.getElementById("liftsinput").innerHTML + "Lift " + liftAmount + ": <input type='text' name='lift" + liftAmount + "'></input><br>Amount:<input type='text' name='amount" + liftAmount + "'></input><br><br>";
+  document.getElementById("liftsinput").innerHTML = document.getElementById("liftsinput").innerHTML + "Lift " + liftAmount + " " + ": <input type='text' name='lift" + liftAmount + "'></input><br><br>Amount: <input type='text' name='amount" + liftAmount + "'></input><br><br>";
   };
 </script>
 {% endblock headcontent %}
 
 {% block bodycontent %}
 <form method="POST" action="/enter">
-  Enter another workout here:
+  <strong>Enter another workout here:</strong>
   <div id="liftsinput">
   <br>
-  Lift 1: <input type="text" name="lift1"></input>
+  <strong>Lift 1:</strong> <input class="form-control" type="text" name="lift1"></input>
   <br>
-  Amount: <input type="text" name="amount1"></input>
+  <strong>Amount:</strong> <input class="form-control" type="text" name="amount1"></input>
   <br>
   <br>
   </div>
-  <button type="button" onclick="addLift();">Add Lift</button>
+  <button class="btn btn-success btn-lg" type="button" onclick="addLift();">Add Lift</button>
   <br>
-  <input type="submit"></submit>
+  <br>
+  <input class="btn btn-info btn-lg" type="submit"></submit>
 </form>
 <br>
 <form method="POST" action="/macros">
-  Input food for: <input type="date" name="date">
-  <input type="text" name="food"></input>
-  <input type="submit"></submit>
+
+  <strong>Input food for:</strong> <input class="form-control" type="date" name="date"> <br><br>
+  <input class="form-control" type="text" name="food"></input>
+  <br> 
+  <input class="btn btn-warning btn-lg" type="submit"></submit>
 </form>
 <br>
 {% for lift in gains %}
