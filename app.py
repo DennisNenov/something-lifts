@@ -57,6 +57,24 @@ def macros():
         d = json.load(url)['foods']
     return render_template("macros.html", d=d, date=date)
 
+@app.route("/stats")
+@login_required
+def stats():
+    user = session['user']
+    gains = tools.getAllLifts(user)
+    foodstuff = tools.getAllFood(user)
+    #avgc = foodstuff["calories"]/foodstuff["numDates"]
+    liftnames = gains.keys();
+    lifts = gains.values();
+    start = 0
+    avgs = []
+    orm = []
+    while start < len(lifts):
+        avgs.append(tools.getAvgROC(lifts[start]))
+        orm.append((max(lifts[start]))/.8)
+        start+=1
+    return render_template("stats.html", avgs=avgs, liftnames=liftnames, orm=orm)
+
 @app.route("/workout")
 @login_required
 def workout():
@@ -87,6 +105,10 @@ def enter():
 def graphs(graph):
     user = session['user']
     gains = tools.getAllLifts(user)
+    if graph=="lift":
+        workoutNumber = request.form.get("workoutNumber")
+        lifts = tools.getLifts(user, workoutNumber)
+        return render_template("lifts.html", lifts=lifts)
     if graph=="food":
         date = request.form.get("date")
         food = tools.getFood(user, date)

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block bodycontent %}
+Your lifts:
+<br>
+{% for key, value in lifts.items() %}
+{{key}}: {{value}}
+<br>
+{% endfor %}
+<br>
+{% endblock bodycontent %}

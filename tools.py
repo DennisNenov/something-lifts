@@ -27,12 +27,9 @@ def enterInfo(user, inputLifts):
         lifts.insert({"user": user,
                       "lifts": inputLifts})
 
-def getLift(user, lift):
-        ans = []
-        for day in lifts.find({"user":user}):
-                ans.append(day['lifts'][lift])
-        print ans
-        return ans
+def getLifts(user, workoutNumber):
+        ans = lifts.find({"user":user})[int(workoutNumber)]
+        return ans['lifts']
 
 def getAllLifts(user):
         liftsDict = {}
@@ -75,18 +72,26 @@ def getAllFood(user):
                 if date not in dates:
                         dates.append(date)
         foodsDict = {}
+        numDates = 0
         for date in dates:
                 calories = 0
                 fat = 0
                 carbs = 0
                 protein = 0
+                numDates += 1
                 for f in food.find({"user": user, "date": date}):
                         calories += float(f['calories'])
                         fat += float(f['fat'])
                         carbs += float(f['carbs'])
                         protein += float(f['protein'])
-                foodsDict[date] = { "calories": calories,
-                                   "fat": fat,
-                                   "carbs": carbs,
-                                   "protein": protein }
+                foodsDict[date] = {"calories": calories,
+                                    "fat": fat,
+                                    "carbs": carbs,
+                                    "protein": protein,
+                                    "numDates": numDates}
         return foodsDict
+
+def getAvgROC(val):
+		avg = ((val[-1]-val[0])/len(val))
+		return avg
+		

@@ -35,7 +35,10 @@ svg.selectAll(".dots")
     .attr("cx",function(d,i){return xScale(i);})
     .attr("cy",function(d){return yScale(d);})
     .attr("r",10)
-    .attr("fill","green");
+    .attr("fill","green")
+    .append("text")
+    .attr("dx", function(d){return -20;})
+    .text(function(){return 'hello';});
 
 var linef = d3.svg.line()
     .x(function(d,i){return xScale(i);})
@@ -47,3 +50,16 @@ svg.append("path")
     .attr("stroke","red")
     .attr("stroke-width",2)
     .attr("fill","none");
+
+var text = svg.selectAll("text")
+    .data(weightlist)
+    .enter()
+    .append("text")
+    .attr("text-anchor", "middle");
+
+text.attr("x", function(d, i) { return i; })
+    .attr("y", function(d) { return d; })
+    .text(function (d) { return d; })
+    .attr("font-family", "sans-serif")
+    .attr("font-size", "20px")
+    .attr("fill", "red");

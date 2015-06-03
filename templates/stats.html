@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block bodycontent %}
+<h3>Your average rate of change for each exercise:</h3>
+<br>
+{% for i in range(avgs|count) %}
+{{liftnames[i]}}: {{avgs[i]}} lbs <br>
+{% endfor %}
+<br>
+<br>
+{% for j in range(liftnames|count) %}
+Your 1-Rep Max for {{liftnames[j]}} is {{orm[j]}} lbs<br>
+{% endfor %}
+(assuming you average 8-reps)
+<br>
+<br>
+{% endblock bodycontent %}
