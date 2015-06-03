@@ -78,6 +78,11 @@ var choice1;
 var choice2;
 var choice3;
 
+var waveTwoResult;
+var r1;
+var r2;
+var r3;
+
 for (var key in firstQuestion) {
 	if (key.substring(0,1) == "A") {
 		// Will use "A" as first characer as check if it's an answer type of key.
@@ -150,7 +155,9 @@ choice3.addEventListener("click", function() {globalQuestionDiv.innerHTML = Answ
 function secondWave() {
 // Add message with new question.
 
-var wave2Question = "Are you interested in Strength, Hypertrophy, or Recomposition?";
+var wave2Question = "<br>Are you interested in Strength, Hypertrophy, or Recomposition?";
+
+var tempQuestion = questionDiv.innerHTML;
 
 globalQuestionDiv.innerHTML = questionDiv.innerHTML + wave2Question;
 
@@ -171,9 +178,9 @@ ans1 = "Strength";
 ans2 = "Hypertrophy";
 ans3 = "Recomposition";
 
-res1 = 'You should try <a href="http://stronglifts.com/about/">StrongLifts5x5</a>.';
-res2 = "You should try AllPro's Routine or PHAT.";
-res3 = "You should try a bodyweight routine.";
+res1 = "<br>You want to focus on strength";
+res2 = "<br>You want to focus on hypertrophy";
+res3 = "<br>You want to focus on recomposition";
 
 // Change the text.
 choice1.innerHTML = '<button id="' + 1 + '" ' + 'class="btn btn-success">' + ans1 + "</button>" + "<br><br>";
@@ -184,14 +191,60 @@ choice3.innerHTML = '<button id="' + 3 + '" ' + 'class="btn btn-success">' + ans
 
 var secondWaveResult;
 
-choice1.addEventListener("click", function() {globalQuestionDiv.innerHTML = globalQuestionDiv.innerHTML + "<br>" + res1; secondWaveResult = "1";});
-choice2.addEventListener("click", function() {globalQuestionDiv.innerHTML = globalQuestionDiv.innerHTML + "<br>" + res2; secondWaveResult = "2";});
-choice3.addEventListener("click", function() {globalQuestionDiv.innerHTML = globalQuestionDiv.innerHTML + "<br>" + res3; secondWaveResult = "3";});
+choice1.addEventListener("click", function() {globalQuestionDiv.innerHTML = tempQuestion + res1; secondWaveResult = "1"; waveTwoResult = "1"; r1 = 'You should try <a href="http://stronglifts.com/about/">StrongLifts 5x5</a>.'; r2 = 'You should try <a href=http://stronglifts.com/madcow/5x5_Program/Linear_5x5.htm>Madcow 5x5</a>.'; r3 = 'You should try <a href="http://www.lift.net/workout-routines/wendler-5-3-1/">5/3/1</a>.'; thirdWave()});
 
+choice2.addEventListener("click", function() {globalQuestionDiv.innerHTML = tempQuestion + res2; secondWaveResult = "2"; waveTwoResult = "2"; r1 = 'You should try <a href="http://forum.bodybuilding.com/showthread.php?t=4195843&page=1">All Pros Simple Beginner Routine</a>.'; r2 = 'You should try <a href="http://www.thespartanwarrior.com/post/10524563698/phat">PHAT</a>.';
+ r3 = 'You should try <a href="http://www.gym-talk.com/arnold-schwarzeneggers-golden-six-routine/">Arnolds Golden Six Routine</a>.';thirdWave()});
+
+choice3.addEventListener("click", function() {globalQuestionDiv.innerHTML = tempQuestion + res3; secondWaveResult = "3"; waveTwoResult = "3"; r1 = 'You should try <a href="http://www.startbodyweight.com/p/start-bodyweight-basic-routine.html">Startbodyweight Basic Routine</a>.'; r2 = 'You should try <a href="http://www.exrx.net/WeightTraining/Weightlifting/AthleticProgram.html">ExRx Athletic Program</a>.'; r3 = 'You should try <a href="http://www.fitness666.com/p/bodyweight-666.html">Bodyweight 666</a>.';thirdWave()});
+
+//waveTwoResult = secondWaveResult;
 // Very good and sex!
 }
 
 function thirdWave() {
+var wave3Question = "<br>Are you a beginner, intermediate, or advanced?";
+
+var tempQuestion = globalQuestionDiv.innerHTML;
+
+globalQuestionDiv.innerHTML = questionDiv.innerHTML + wave3Question;
+
+// Edit the three answer choices, remove and re-add eventListeners.
+
+// Test if choice is detected.
+
+console.log("Cock!");
+console.log(choice1);
+
+// Removing the existing EventListeners from Wave 1.
+choice1.removeEventListener();
+choice2.removeEventListener();
+choice3.removeEventListener();
+
+// Establish the options (text).
+var aans1 = "Beginner";
+var aans2 = "Intermediate";
+var aans3 = "Advanced";
+
+var rr1 = r1;
+var rr2 = r2;
+var rr3 = r3;
+
+// Change the text.
+choice1.innerHTML = '<button id="' + 1 + '" ' + 'class="btn btn-success">' + aans1 + "</button>" + "<br><br>";
+choice2.innerHTML = '<button id="' + 2 + '" ' + 'class="btn btn-success">' + aans2 + "</button>" + "<br><br>";
+choice3.innerHTML = '<button id="' + 3 + '" ' + 'class="btn btn-success">' + aans3 + "</button>" + "<br><br>";
+
+// Add new event listeners.
+
+var thirdWaveResult;
+
+choice1.addEventListener("click", function() {globalQuestionDiv.innerHTML = tempQuestion + "<br>" + rr1 + "<br><br><a href='/workout'>Start Over?</a>"; thirdWaveResult = "1"; fourthWave()});
+choice2.addEventListener("click", function() {globalQuestionDiv.innerHTML = tempQuestion + "<br>" + rr2 + "<br><br><a href='/workout'>Start Over?</a>"; thirdWaveResult = "2"; fourthWave()});
+choice3.addEventListener("click", function() {globalQuestionDiv.innerHTML = tempQuestion + "<br>" + rr3 + "<br><br><a href='/workout'>Start Over?</a>"; thirdWaveResult = "3"; fourthWave()});
+}
+
+function fourthWave() {
 	choice1.removeEventListener();
 	choice2.removeEventListener();
 	choice3.removeEventListener();
