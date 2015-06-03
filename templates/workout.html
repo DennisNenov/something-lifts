@@ -113,6 +113,10 @@ for (var key in firstQuestion) {
 
 // Hard-coding fix for above bug.
 
+// Hard-coded first wave Q/A.
+
+var firstWaveResult;
+
 var Answer1text = firstQuestion["Answer1"]["Message"];
 var Answer2text = firstQuestion["Answer2"]["Message"];
 var Answer3text = firstQuestion["Answer3"]["Message"];
@@ -127,9 +131,22 @@ console.log(document.getElementById('1'));
 //document.getElementById('2').removeEventListener();
 //document.getElementById('3').removeEventListener();
 
-document.getElementById('1').addEventListener("click", function() {globalQuestionDiv.innerHTML = Answer1text;});
-document.getElementById('2').addEventListener("click", function() {globalQuestionDiv.innerHTML = Answer2text;});
-document.getElementById('3').addEventListener("click", function() {globalQuestionDiv.innerHTML = Answer3text;});
+document.getElementById('1').addEventListener("click", function() {globalQuestionDiv.innerHTML = Answer1text; firstWaveResult = "1";});
+document.getElementById('2').addEventListener("click", function() {globalQuestionDiv.innerHTML = Answer2text; firstWaveResult = "2";});
+document.getElementById('3').addEventListener("click", function() {globalQuestionDiv.innerHTML = Answer3text; firstWaveResult = "3";});
+
+// Begin second wave.
+
+// Add message with new question.
+
+var wave2Question = "Are you interested in Strength or Hypertrophy?";
+
+globalQuestionDiv.innerHTML = questionDiv.innerHTML + wave2Question;
+
+// Edit the three answer choices, remove and re-add eventListeners.
+
+
+
 
 function responseClick() {
 	// Determines response clicked (based on div), 
