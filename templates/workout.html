@@ -100,7 +100,7 @@ for (var key in firstQuestion) {
 		// Closure issue with JavaScript
 		// Solution to implement:
 		// http://stackoverflow.com/questions/750486/javascript-closure-inside-loops-simple-practical-example
-		thisAnswerDiv.addEventListener("click", function() {questionDiv.innerHTML = thisMessage;}, false);
+		//thisAnswerDiv.addEventListener("click", function() {questionDiv.innerHTML = thisMessage;}, false);
 		
 		globalQuestionDiv = questionDiv; // Pass the local variable into the global 
 	}
@@ -113,13 +113,23 @@ for (var key in firstQuestion) {
 
 // Hard-coding fix for above bug.
 
-var Answer1text = firstQuestion["Answer1"]["answer_text"];
-var Answer2text = firstQuestion["Answer2"]["answer_text"];
-var Answer3text = firstQuestion["Answer3"]["answer_text"];
+var Answer1text = firstQuestion["Answer1"]["Message"];
+var Answer2text = firstQuestion["Answer2"]["Message"];
+var Answer3text = firstQuestion["Answer3"]["Message"];
 
-document.getElementById("1").addEventListener(function() {globalQuestionDiv.innerHTML = Answer1text;});
-document.getElementById("2").addEventListener(function() {globalQuestionDiv.innerHTML = Answer2text;});
-document.getElementById("3").addEventListener(function() {globalQuestionDiv.innerHTML = Answer3text;});
+console.log(Answer1text);
+console.log(Answer2text);
+console.log(Answer3text);
+
+console.log(document.getElementById('1'));
+
+//document.getElementById('1').removeEventListener();
+//document.getElementById('2').removeEventListener();
+//document.getElementById('3').removeEventListener();
+
+document.getElementById('1').addEventListener("click", function() {globalQuestionDiv.innerHTML = Answer1text;});
+document.getElementById('2').addEventListener("click", function() {globalQuestionDiv.innerHTML = Answer2text;});
+document.getElementById('3').addEventListener("click", function() {globalQuestionDiv.innerHTML = Answer3text;});
 
 function responseClick() {
 	// Determines response clicked (based on div), 
