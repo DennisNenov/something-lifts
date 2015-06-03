@@ -74,6 +74,9 @@ var globalQuestionDiv;
 var keyArray = ["Answer1", "Answer2", "Answer3"];
 // Access keyArray[keyID - 1] in order to get the corresponding key in the dictionary.
 
+var choice1;
+var choice2;
+var choice3;
 
 for (var key in firstQuestion) {
 	if (key.substring(0,1) == "A") {
@@ -103,6 +106,10 @@ for (var key in firstQuestion) {
 		//thisAnswerDiv.addEventListener("click", function() {questionDiv.innerHTML = thisMessage;}, false);
 		
 		globalQuestionDiv = questionDiv; // Pass the local variable into the global 
+		// Same for the others.
+		choice1 = document.getElementById('1');
+		choice2 = document.getElementById('2');
+		choice3 = document.getElementById('3');
 	}
 }
 // In the loop above, 
@@ -131,22 +138,58 @@ console.log(document.getElementById('1'));
 //document.getElementById('2').removeEventListener();
 //document.getElementById('3').removeEventListener();
 
-document.getElementById('1').addEventListener("click", function() {globalQuestionDiv.innerHTML = Answer1text; firstWaveResult = "1";});
-document.getElementById('2').addEventListener("click", function() {globalQuestionDiv.innerHTML = Answer2text; firstWaveResult = "2";});
-document.getElementById('3').addEventListener("click", function() {globalQuestionDiv.innerHTML = Answer3text; firstWaveResult = "3";});
+
+
+choice1.addEventListener("click", function() {globalQuestionDiv.innerHTML = Answer1text; firstWaveResult = "1"; secondWave()});
+choice2.addEventListener("click", function() {globalQuestionDiv.innerHTML = Answer2text; firstWaveResult = "2"; secondWave()});
+choice3.addEventListener("click", function() {globalQuestionDiv.innerHTML = Answer3text; firstWaveResult = "3"; secondWave()});
 
 // Begin second wave.
 
+
+function secondWave() {
 // Add message with new question.
 
-var wave2Question = "Are you interested in Strength or Hypertrophy?";
+var wave2Question = "Are you interested in Strength, Hypertrophy, or Recomposition?";
 
 globalQuestionDiv.innerHTML = questionDiv.innerHTML + wave2Question;
 
 // Edit the three answer choices, remove and re-add eventListeners.
 
+// Test if choice is detected.
 
+console.log("Cock!");
+console.log(choice1);
 
+// Removing the existing EventListeners from Wave 1.
+choice1.removeEventListener();
+choice2.removeEventListener();
+choice3.removeEventListener();
+
+// Establish the options (text).
+ans1 = "Strength";
+ans2 = "Hypertrophy";
+ans3 = "Recomposition";
+
+res1 = 'You should try <a href="http://stronglifts.com/about/">StrongLifts5x5</a>.';
+res2 = "You should try AllPro's Routine or PHAT.";
+res3 = "You should try a bodyweight routine.";
+
+// Change the text.
+choice1.innerHTML = '<button id="' + 1 + '" ' + 'class="btn btn-success">' + ans1 + "</button>" + "<br><br>";
+choice2.innerHTML = '<button id="' + 2 + '" ' + 'class="btn btn-success">' + ans2 + "</button>" + "<br><br>";
+choice3.innerHTML = '<button id="' + 3 + '" ' + 'class="btn btn-success">' + ans3 + "</button>" + "<br><br>";
+
+// Add new event listeners.
+
+var secondWaveResult;
+
+choice1.addEventListener("click", function() {globalQuestionDiv.innerHTML = globalQuestionDiv.innerHTML + "<br>" + res1; secondWaveResult = "1";});
+choice2.addEventListener("click", function() {globalQuestionDiv.innerHTML = globalQuestionDiv.innerHTML + "<br>" + res2; secondWaveResult = "2";});
+choice3.addEventListener("click", function() {globalQuestionDiv.innerHTML = globalQuestionDiv.innerHTML + "<br>" + res3; secondWaveResult = "3";});
+
+// Very good and sex!
+}
 
 function responseClick() {
 	// Determines response clicked (based on div), 
