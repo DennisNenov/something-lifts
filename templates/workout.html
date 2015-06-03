@@ -191,6 +191,12 @@ choice3.addEventListener("click", function() {globalQuestionDiv.innerHTML = glob
 // Very good and sex!
 }
 
+function thirdWave() {
+	choice1.removeEventListener();
+	choice2.removeEventListener();
+	choice3.removeEventListener();
+}
+
 function responseClick() {
 	// Determines response clicked (based on div), 
 	// (signalled by onclick eventwatcher),
