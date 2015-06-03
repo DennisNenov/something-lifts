@@ -69,6 +69,12 @@ questionDiv.innerHTML = firstQuestionText;
 // This is done in the current template with "Answer#", 
 // e.g. "Answer1" "Answer2" "Answer3"
 
+var globalQuestionDiv;
+
+var keyArray = ["Answer1", "Answer2", "Answer3"];
+// Access keyArray[keyID - 1] in order to get the corresponding key in the dictionary.
+
+
 for (var key in firstQuestion) {
 	if (key.substring(0,1) == "A") {
 		// Will use "A" as first characer as check if it's an answer type of key.
@@ -95,8 +101,25 @@ for (var key in firstQuestion) {
 		// Solution to implement:
 		// http://stackoverflow.com/questions/750486/javascript-closure-inside-loops-simple-practical-example
 		thisAnswerDiv.addEventListener("click", function() {questionDiv.innerHTML = thisMessage;}, false);
+		
+		globalQuestionDiv = questionDiv; // Pass the local variable into the global 
 	}
 }
+// In the loop above, 
+// a quirky feature of JavaScript's treatment of closure
+// with anonymous functions.
+
+// Don't forget to remove the event listener.
+
+// Hard-coding fix for above bug.
+
+var Answer1text = firstQuestion["Answer1"]["answer_text"];
+var Answer2text = firstQuestion["Answer2"]["answer_text"];
+var Answer3text = firstQuestion["Answer3"]["answer_text"];
+
+document.getElementById("1").addEventListener(function() {globalQuestionDiv.innerHTML = Answer1text;});
+document.getElementById("2").addEventListener(function() {globalQuestionDiv.innerHTML = Answer2text;});
+document.getElementById("3").addEventListener(function() {globalQuestionDiv.innerHTML = Answer3text;});
 
 function responseClick() {
 	// Determines response clicked (based on div), 
