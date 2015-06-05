@@ -15,6 +15,8 @@ var yScale = d3.scale.linear()
 
 var yAxis = d3.svg.axis().scale(yScale).orient("left");
 
+var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+
 var svg = d3.select("#content").append("svg")
     .attr("width", 800)
     .attr("height", 400)
@@ -23,6 +25,10 @@ var svg = d3.select("#content").append("svg")
     .append("g")
     .attr("transform","translate(40,0)")
     .call(yAxis)
+
+svg.append("g")
+    .attr("transform", "translate(0, 375)")
+    .call(xAxis)
 
 svg.selectAll(".dots")
     .data(weightlist)

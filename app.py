@@ -51,10 +51,14 @@ def macros():
             #return str(tools.getFood(user, date))
             flash("Food input successful")
             return redirect(url_for("dashboard"))
-        date = request.form.get("date")
-        food = request.form.get("food")
-        url = urllib2.urlopen("https://api.damonmcminn.com/nutrition/food?search=" + food)
-        d = json.load(url)['foods']
+        date = request.form.get("date", None)
+        food = request.form.get("food", None)
+        if date==None or date=="" or food==None or food=="":
+            flash("Please input values for the date and food")
+            return redirect(url_for("dashboard"))
+        else:
+            url = urllib2.urlopen("https://api.damonmcminn.com/nutrition/food?search=" + food.replace(" ", "-"))
+            d = json.load(url)['foods']
     return render_template("macros.html", d=d, date=date)
 
 @app.route("/stats")

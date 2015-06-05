@@ -7,6 +7,16 @@
   liftAmount += 1;
   document.getElementById("liftsinput").innerHTML = document.getElementById("liftsinput").innerHTML + "<strong>Lift " + liftAmount + ":</strong> <input class='form-control' type='text' name='lift" + liftAmount + "'></input><br><strong>Amount:</strong> <input class='form-control' type='text' name='amount" + liftAmount + "'></input><br><br>";
   };
+  var removeLift = function() {
+  var txt = document.getElementById("liftsinput").innerHTML;
+  console.log(liftAmount);
+  console.log(liftAmount>1);
+  if (liftAmount>1) {
+    liftAmount -= 1;
+    console.log(liftAmount);
+    document.getElementById("liftsinput").innerHTML = txt.substring(0, txt.lastIndexOf("Lift")-8);
+  };
+  };
 </script>
 {% endblock headcontent %}
 
@@ -22,7 +32,8 @@
   <br>
   <br>
   </div>
-  <button class="btn btn-success btn-lg" type="button" onclick="addLift();">Add Lift</button>
+  <button class="btn btn-success btn-lg" type="button" onclick="addLift();">Add Exercise</button>
+  <button class="btn btn-success btn-lg" type="button" onclick="removeLift();">Remove Last Exercise</button>
   <br>
   <br>
   <input class="btn btn-info btn-lg" type="submit"></submit>
