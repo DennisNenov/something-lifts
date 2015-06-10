@@ -132,6 +132,23 @@ def goals():
        #keep copy+pasting and changing the goals to the different goals youre going to include
     return render_template("goals.html")
 
+@app.route("/bodyweight", methods=["POST"])
+def weight():
+    try:
+        weight = float(request.form["weight"])
+        height = float(request.form["height"])
+        age = float(request.form["age"])
+        gender = request.form["gender"]
+    except:
+        return "Please enter numbers for weight, height, and age"
+    if gender == "Male":
+        tdee = 10 * weight / 2.2 + 6.25 * height * 2.54 - 5 * age + 5
+    elif gender == "Female":
+        tdee = 10 * weight / 2.2 + 6.25 * height * 2.54 - 5 * age - 161
+    protein = weight / 2.2
+    fat = weight / 2
+    return render_template("bodyweight.html", weight=weight, tdee=tdee, protein=protein, fat=fat)
+
 @app.route("/about")
 def about():
     return render_template("about.html")

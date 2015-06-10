@@ -61,4 +61,34 @@
 <form action="/graphs/food" method="POST">
   View Food Information for <input type="date" name="date"></input><input type="submit"></input></a>
 </form>
+<br>
+<form action="/bodyweight" method="POST">
+  Enter Your Weight: 
+  <input type="text" name="weight"></input>
+  <br>
+  Gender:
+  <input type="radio" name="gender" value="Male">Male</input>
+  <input type="radio" name="gender" value="Female">Female</input>
+  <br>
+  Height in inches:
+  <input type="text" name="height"></input>
+  <br>
+  Age:
+  <input type="text" name="age"></input>
+  <br>
+  Exercise level:
+  <select name="level">
+    <option value="base">Basal Metabolic Rate</option>
+    <option value="no">No exercise</option>
+    <option value="three">3 times/week</option>
+    <option value="four">4 times/week</option>
+    <option value="five">5 times/week</option>
+    <option value="six">6 times/week</option>
+    <option value="fivei">5 times/week intense</option>
+    <option value="every">Every Day</option>
+    <option value="everyi">Every Day intense or twice daily</option>
+    <option value="dailyjob">Daily Exercise and Physical Job</option>
+  </select>
+  <input type="submit" value="Get Nutrition Requirements"></input>
+</form>
 {% endblock bodycontent %}
