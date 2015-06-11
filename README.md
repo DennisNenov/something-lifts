@@ -1,4 +1,4 @@
-# something-lifts
+# something-lifts by Anish Malhotra and Elvin Shoyfer
 
 ## About something-lifts
 
@@ -13,3 +13,9 @@ Flask, MongoDB, Bootstrap, JQuery, D3.
 ## For
 
 Soft Dev Final Project, Spring '15.
+
+## Deployed at
+
+http://104.131.37.75/
+
+## YouTube Trailer
